@@ -1,0 +1,8 @@
+[workspace]
+resolver = "2"
+members = [
+    "secret-sharing",
+    "dist-primitives",
+    "mpc-net",
+    "groth16",
+]
