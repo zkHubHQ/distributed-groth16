@@ -1,5 +1,4 @@
 use std::sync::Arc;
-
 use ark_bn254::{Bn254, Fr as Bn254Fr};
 use ark_circom::{CircomBuilder, CircomConfig, CircomReduction};
 use ark_crypto_primitives::snark::SNARK;
@@ -126,8 +125,8 @@ async fn main() {
     env_logger::builder().format_timestamp(None).init();
 
     let cfg = CircomConfig::<Bn254>::new(
-        "./fixtures/sha256/sha256_js/sha256.wasm",
-        "./fixtures/sha256/sha256.r1cs",
+        "../fixtures/sha256/sha256_js/sha256.wasm",
+        "../fixtures/sha256/sha256.r1cs",
     )
     .unwrap();
     let mut builder = CircomBuilder::new(cfg);
@@ -154,6 +153,11 @@ async fn main() {
 
     let r = Bn254Fr::zero();
     let s = Bn254Fr::zero();
+
+    debug!("------------");
+    debug!("Start creating proof without MPC");
+    // measure time to create proof without MPC
+    let arkworks_proof_time = start_timer!(|| "Arkworks Proof");
     let arkworks_proof = Groth16::<Bn254, CircomReduction>::create_proof_with_reduction_and_matrices(
         &pk,
         r,
@@ -163,6 +167,8 @@ async fn main() {
         num_constraints,
         &full_assignment,
     ).unwrap();
+    end_timer!(arkworks_proof_time);
+    debug!("End creating proof without MPC");
 
     let pp = PackedSharingParams::new(2);
     let qap_shares = qap.pss(&pp);
@@ -180,6 +186,9 @@ async fn main() {
         pack_from_witness::<Bn254>(&pp, full_assignment[1..].to_vec());
     let network = Net::new_local_testnet(pp.n).await.unwrap();
 
+    debug!("------------");
+    debug!("Start creating proof with MPC");
+    let mpc_proof_time = start_timer!(|| "MPC Proof");
     let result = network
         .simulate_network_round(
             (crs_shares, pp, a_shares, ax_shares, qap_shares),
@@ -194,6 +203,9 @@ async fn main() {
             },
         )
         .await;
+    end_timer!(mpc_proof_time);
+    debug!("End creating proof with MPC");
+
     let (mut a, mut b, c) = result[0];
     // These elements are needed to construct the full proof, they are part of the proving key.
     // however, we can just send these values to the client, not the full proving key.
@@ -206,6 +218,10 @@ async fn main() {
     debug!("arkworks_a:{}", arkworks_proof.a);
     debug!("arkworks_b:{}", arkworks_proof.b);
     debug!("arkworks_c:{}", arkworks_proof.c);
+
+    debug!("------------");
+    debug!("time arkworks_proof: {:?}", arkworks_proof_time.time.elapsed());
+    debug!("time mpc_proof: {:?}", mpc_proof_time.time.elapsed());
 
     let pvk = ark_groth16::verifier::prepare_verifying_key(&vk);
     let verified = Groth16::<Bn254, CircomReduction>::verify_with_processed_vk(

@@ -4,6 +4,7 @@ use std::future::Future;
 use std::net::SocketAddr;
 use std::sync::Arc;
 use std::time::Duration;
+use serde::de;
 use tokio::io::{AsyncRead, AsyncReadExt, AsyncWrite, AsyncWriteExt};
 use tokio::net::{TcpListener, TcpStream};
 
@@ -222,6 +223,7 @@ impl MpcNetConnection<TcpStream> {
     }
 }
 
+#[derive(Debug)]
 pub struct LocalTestNet {
     nodes: HashMap<usize, MpcNetConnection<TcpStream>>,
 }
