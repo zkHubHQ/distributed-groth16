@@ -1,0 +1,6 @@
+{
+    "rust-analyzer.linkedProjects": [
+        "./mpc-api/Cargo.toml",
+        "./mpc-api/Cargo.toml"
+    ]
+}

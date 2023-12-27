@@ -1,0 +1,15 @@
+[package]
+name = "zk-cli"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+reqwest = "0.11.23"     # For making HTTP requests
+clap = "4.4.11"         # For parsing command-line arguments
+log = "0.4.20"          # For logging
+env_logger = "0.10.1"   # For environment-based logger configuration
+colored = "2.1.0"       # For colorful output
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
