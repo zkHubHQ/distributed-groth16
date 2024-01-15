@@ -6,10 +6,14 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-reqwest = "0.11.23"     # For making HTTP requests
-clap = "4.4.11"         # For parsing command-line arguments
+reqwest = { version = "0.11.23", features = ["json", "multipart"] }    # For making HTTP requests
+clap = { version = "4.4.11", features = ["derive"] }        # For parsing command-line arguments
 log = "0.4.20"          # For logging
 env_logger = "0.10.1"   # For environment-based logger configuration
 colored = "2.1.0"       # For colorful output
 serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1.0", features = ["full"] }
 serde_json = "1.0"
+common = { path = "../common" }
+ark-serialize = { version = "0.4.0", default-features = false, features = [ "derive" ] }
+ark-bn254 = {version = "0.4.0", default-features = false, features = ["curve"] }

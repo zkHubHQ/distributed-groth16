@@ -1,0 +1,779 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'secret-sharing'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=secret-sharing"
+                ],
+                "filter": {
+                    "name": "secret-sharing",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'dist-primitives'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=dist-primitives"
+                ],
+                "filter": {
+                    "name": "dist-primitives",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'msm_bench'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=msm_bench",
+                    "--package=dist-primitives"
+                ],
+                "filter": {
+                    "name": "msm_bench",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'msm_bench'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=msm_bench",
+                    "--package=dist-primitives"
+                ],
+                "filter": {
+                    "name": "msm_bench",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'dfft_test'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=dfft_test",
+                    "--package=dist-primitives"
+                ],
+                "filter": {
+                    "name": "dfft_test",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'dfft_test'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=dfft_test",
+                    "--package=dist-primitives"
+                ],
+                "filter": {
+                    "name": "dfft_test",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'dmsm_bench'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=dmsm_bench",
+                    "--package=dist-primitives"
+                ],
+                "filter": {
+                    "name": "dmsm_bench",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'dmsm_bench'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=dmsm_bench",
+                    "--package=dist-primitives"
+                ],
+                "filter": {
+                    "name": "dmsm_bench",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'dpp_test'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=dpp_test",
+                    "--package=dist-primitives"
+                ],
+                "filter": {
+                    "name": "dpp_test",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'dpp_test'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=dpp_test",
+                    "--package=dist-primitives"
+                ],
+                "filter": {
+                    "name": "dpp_test",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'dmsm_test'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=dmsm_test",
+                    "--package=dist-primitives"
+                ],
+                "filter": {
+                    "name": "dmsm_test",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'dmsm_test'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=dmsm_test",
+                    "--package=dist-primitives"
+                ],
+                "filter": {
+                    "name": "dmsm_test",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'local_dfft_test'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=local_dfft_test",
+                    "--package=dist-primitives"
+                ],
+                "filter": {
+                    "name": "local_dfft_test",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'local_dfft_test'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=local_dfft_test",
+                    "--package=dist-primitives"
+                ],
+                "filter": {
+                    "name": "local_dfft_test",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'mpc-net'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=mpc-net"
+                ],
+                "filter": {
+                    "name": "mpc-net",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'add_ids'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=add_ids",
+                    "--package=mpc-net"
+                ],
+                "filter": {
+                    "name": "add_ids",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'add_ids'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=add_ids",
+                    "--package=mpc-net"
+                ],
+                "filter": {
+                    "name": "add_ids",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'gen_cert'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=gen_cert",
+                    "--package=mpc-net"
+                ],
+                "filter": {
+                    "name": "gen_cert",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'gen_cert'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=gen_cert",
+                    "--package=mpc-net"
+                ],
+                "filter": {
+                    "name": "gen_cert",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'mpc-api'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=mpc-api",
+                    "--package=mpc-api"
+                ],
+                "filter": {
+                    "name": "mpc-api",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "RUST_LOG": "info"
+            }
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'mpc-api'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=mpc-api",
+                    "--package=mpc-api"
+                ],
+                "filter": {
+                    "name": "mpc-api",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'common'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=common"
+                ],
+                "filter": {
+                    "name": "common",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'groth16'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=groth16"
+                ],
+                "filter": {
+                    "name": "groth16",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'test'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=test",
+                    "--package=groth16"
+                ],
+                "filter": {
+                    "name": "test",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'test'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=test",
+                    "--package=groth16"
+                ],
+                "filter": {
+                    "name": "test",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'nonlocal_sha256'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=nonlocal_sha256",
+                    "--package=groth16"
+                ],
+                "filter": {
+                    "name": "nonlocal_sha256",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'nonlocal_sha256'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=nonlocal_sha256",
+                    "--package=groth16"
+                ],
+                "filter": {
+                    "name": "nonlocal_sha256",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'million'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=million",
+                    "--package=groth16"
+                ],
+                "filter": {
+                    "name": "million",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'million'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=million",
+                    "--package=groth16"
+                ],
+                "filter": {
+                    "name": "million",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'local_sui_zklogin'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=local_sui_zklogin",
+                    "--package=groth16"
+                ],
+                "filter": {
+                    "name": "local_sui_zklogin",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'local_sui_zklogin'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=local_sui_zklogin",
+                    "--package=groth16"
+                ],
+                "filter": {
+                    "name": "local_sui_zklogin",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'sha256'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=sha256",
+                    "--package=groth16"
+                ],
+                "filter": {
+                    "name": "sha256",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'sha256'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=sha256",
+                    "--package=groth16"
+                ],
+                "filter": {
+                    "name": "sha256",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'local_groth_bench'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=local_groth_bench",
+                    "--package=groth16"
+                ],
+                "filter": {
+                    "name": "local_groth_bench",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'local_groth_bench'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=local_groth_bench",
+                    "--package=groth16"
+                ],
+                "filter": {
+                    "name": "local_groth_bench",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'd_sha256'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=d_sha256",
+                    "--package=groth16"
+                ],
+                "filter": {
+                    "name": "d_sha256",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'd_sha256'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=d_sha256",
+                    "--package=groth16"
+                ],
+                "filter": {
+                    "name": "d_sha256",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'zk-cli' for save",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=zk-cli",
+                    "--package=zk-cli"
+                ],
+                "filter": {
+                    "name": "zk-cli",
+                    "kind": "bin"
+                }
+            },
+            "args": ["save", "sha256", "./zk-cli/test-circuits/sha256/sha256.r1cs", "./zk-cli/test-circuits/sha256/sha256_js/sha256.wasm"],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'zk-cli' for prove",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=zk-cli",
+                    "--package=zk-cli"
+                ],
+                "filter": {
+                    "name": "zk-cli",
+                    "kind": "bin"
+                }
+            },
+            "env": {
+                "RUST_LOG": "info",
+                "RUST_BACKTRACE": "1"
+            },
+            "args": ["prove", "circuit_sha256_1705090644704", "./zk-cli/test-circuits/sha256/input.json", "./zk-cli/test-circuits/sha256/proof.json"],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'zk-cli' for verify",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=zk-cli",
+                    "--package=zk-cli"
+                ],
+                "filter": {
+                    "name": "zk-cli",
+                    "kind": "bin"
+                }
+            },
+            "env": {
+                "RUST_LOG": "info",
+                "RUST_BACKTRACE": "1"
+            },
+            "args": ["verify", "circuit_sha256_1705090644704", "./zk-cli/test-circuits/sha256/proof.json", "./zk-cli/test-circuits/sha256/public.json"],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'zk-cli'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=zk-cli",
+                    "--package=zk-cli"
+                ],
+                "filter": {
+                    "name": "zk-cli",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

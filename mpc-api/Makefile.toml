@@ -1,0 +1,16 @@
+[tasks.build]
+command = "cargo"
+args = ["build"]
+
+[tasks.serve]
+command = "cargo"
+args = ["run"]
+
+[tasks.test]
+command = "cargo"
+args = ["test"]
+
+# only start server in cargo watch
+[tasks.watch]
+command = "cargo"
+args = ["watch", "-x", "run"]

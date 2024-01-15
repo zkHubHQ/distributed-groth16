@@ -6,3 +6,4 @@ Cargo.lock
 node_modules
 powersOfTau*
 *.zkey
+circuits/

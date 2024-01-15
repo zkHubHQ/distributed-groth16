@@ -7,4 +7,5 @@ members = [
     "mpc-api",
     "groth16",
     "zk-cli",
+    "common"
 ]
