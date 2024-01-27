@@ -6,14 +6,14 @@ edition = "2021"
 [dependencies]
 # ARK Libraries
 ark-std = {version = "0.4.0", default-features = false, features = [ "print-trace", "std" ]}
-ark-crypto-primitives = {version = "0.4.0", default-features = false}
+ark-crypto-primitives = { git = "https://github.com/zkHubHQ/crypto-primitives.git", default-features = false, branch = "distributed-groth16" }
 ark-ff = {version = "0.4.0", default-features = false}
 ark-poly = {version = "0.4.0", default-features = false}
 ark-ec = {version = "0.4.0", default-features = false}
-ark-relations = { version = "0.4.0", default-features = false }
+ark-relations = { git = "https://github.com/zkHubHQ/snark.git", default-features = false, branch = "distributed-groth16" }
 ark-serialize = { version = "0.4.0", default-features = false, features = [ "derive" ] }
-ark-groth16 = { version = "0.4.0", default-features = false }
-ark-circom = { git = "https://github.com/arkworks-rs/circom-compat.git" }
+ark-groth16 = { git = "https://github.com/zkHubHQ/groth16.git", default-features = false, branch = "distributed-groth16" }
+ark-circom = { version = "0.1.0", path = "../ark-circom" }
 
 # ARK curves
 ark-bls12-377 = {version = "0.4.0", default-features = false, features = ["curve"] }
@@ -36,3 +36,6 @@ tokio = { version = "1.32.0", features = ["macros", "rt"] }
 
 [features]
 parallel = ["ark-std/parallel", "rayon"]
+
+[patch.crates-io]
+ark-relations = { git = "https://github.com/zkHubHQ/snark.git", default-features = false, branch = "distributed-groth16" }

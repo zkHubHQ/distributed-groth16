@@ -1,4 +1,3 @@
-use std::sync::Arc;
 use ark_bn254::{Bn254, Fr as Bn254Fr};
 use ark_circom::{CircomBuilder, CircomConfig, CircomReduction};
 use ark_crypto_primitives::snark::SNARK;
@@ -10,6 +9,7 @@ use ark_poly::Radix2EvaluationDomain;
 use ark_relations::r1cs::{ConstraintSynthesizer, ConstraintSystem};
 use ark_std::{cfg_chunks, cfg_into_iter, end_timer, start_timer, Zero};
 use dist_primitives::Opt;
+use std::sync::Arc;
 
 use groth16::qap::qap;
 use groth16::{ext_wit, qap};
@@ -168,7 +168,8 @@ async fn main() {
         num_inputs,
         num_constraints,
         &full_assignment,
-    ).unwrap();
+    )
+    .unwrap();
     end_timer!(arkworks_proof_time);
     debug!("End creating proof without MPC");
 
@@ -222,7 +223,10 @@ async fn main() {
     debug!("arkworks_c:{}", arkworks_proof.c);
 
     debug!("------------");
-    debug!("time arkworks_proof: {:?}", arkworks_proof_time.time.elapsed());
+    debug!(
+        "time arkworks_proof: {:?}",
+        arkworks_proof_time.time.elapsed()
+    );
     debug!("time mpc_proof: {:?}", mpc_proof_time.time.elapsed());
 
     let pvk = ark_groth16::verifier::prepare_verifying_key(&vk);

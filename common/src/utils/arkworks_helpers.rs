@@ -1,22 +1,9 @@
-use ark_bn254::{Bn254, Fr as Bn254Fr, FrConfig};
-use ark_circom::{CircomBuilder, CircomConfig};
 use ark_ec::pairing::Pairing;
-use ark_ff::{Fp, MontBackend};
 use ark_groth16::Proof;
 use ark_serialize::{CanonicalDeserialize, Compress, Validate};
-use ark_std::rand::SeedableRng;
-use num_bigint::BigInt;
-use std::collections::HashMap;
 use std::error::Error;
-use std::fmt;
-use std::str::FromStr;
-use tokio::fs;
 
-use crate::dto::GetCircuitFilesResponse;
-use crate::utils::file::write_to_file;
-
-use super::file::{find_latest_file_with_extension, read_file_as_string};
-use super::serializer::{ark_de, ark_se};
+use super::file::{read_file_as_string, read_file_as_vec};
 
 use serde::Deserialize;
 use serde_json::Value;
@@ -55,19 +42,7 @@ pub struct InputVec(
 pub async fn parse_proof<E: Pairing>(
     proof_filepath: &str,
 ) -> Result<Proof<E>, Box<dyn Error>> {
-    // // Read JSON string from file
-    // let json_str = read_file_as_string(proof_filepath)?;
-
-    // // Deserialize JSON string into Vec<u8>
-    // let bytes: Vec<u8> = serde_json::from_str(&json_str)?;
-
-    // // Use the ark_de function to deserialize Vec<u8> into Proof<E>
-    // let proof: Proof<E> =
-    //     ark_de(&mut serde_json::Deserializer::from_slice(&bytes))?;
-
-    let proof_data = fs::read(&proof_filepath)
-        .await
-        .expect("Failed to read the proving key file");
+    let proof_data = read_file_as_vec(&proof_filepath)?;
     let proof: Proof<E> = Proof::deserialize_with_mode(
         proof_data.as_slice(),
         Compress::Yes,

@@ -1,7 +1,9 @@
 use ark_ff::PrimeField;
 use ark_groth16::r1cs_to_qap::evaluate_constraint;
 use ark_poly::EvaluationDomain;
-use ark_relations::r1cs::{ConstraintMatrices, SynthesisError};
+use ark_relations::r1cs::{
+    ConstraintMatrices, ConstraintMatricesAsync, SynthesisError,
+};
 use ark_std::{cfg_into_iter, cfg_iter, cfg_iter_mut, vec};
 use dist_primitives::dfft::fft_in_place_rearrange;
 use secret_sharing::pss::PackedSharingParams;
@@ -41,6 +43,55 @@ pub struct PackedQAPShare<F: PrimeField, D: EvaluationDomain<F>> {
 
 pub fn qap<F: PrimeField, D: EvaluationDomain<F>>(
     matrices: &ConstraintMatrices<F>,
+    full_assignment: &[F],
+) -> Result<QAP<F, D>, SynthesisError> {
+    let zero = F::zero();
+
+    let num_inputs = matrices.num_instance_variables;
+    let num_constraints = matrices.num_constraints;
+
+    let domain = D::new(num_constraints + num_inputs)
+        .ok_or(SynthesisError::PolynomialDegreeTooLarge)?;
+    let domain_size = domain.size();
+
+    let mut a = vec![zero; domain_size];
+    let mut b = vec![zero; domain_size];
+
+    cfg_iter_mut!(a[..num_constraints])
+        .zip(cfg_iter_mut!(b[..num_constraints]))
+        .zip(cfg_iter!(&matrices.a))
+        .zip(cfg_iter!(&matrices.b))
+        .for_each(|(((a, b), at_i), bt_i)| {
+            *a = evaluate_constraint(at_i, full_assignment);
+            *b = evaluate_constraint(bt_i, full_assignment);
+        });
+
+    {
+        let start = num_constraints;
+        let end = start + num_inputs;
+        a[start..end].clone_from_slice(&full_assignment[..num_inputs]);
+    }
+
+    let mut c = vec![zero; domain_size];
+    cfg_iter_mut!(c[..num_constraints])
+        .zip(&a)
+        .zip(&b)
+        .for_each(|((c_i, &a), &b)| {
+            *c_i = a * b;
+        });
+
+    Ok(QAP {
+        num_inputs,
+        num_constraints,
+        a,
+        b,
+        c,
+        domain,
+    })
+}
+
+pub fn qap_async<F: PrimeField, D: EvaluationDomain<F>>(
+    matrices: &ConstraintMatricesAsync<F>,
     full_assignment: &[F],
 ) -> Result<QAP<F, D>, SynthesisError> {
     let zero = F::zero();

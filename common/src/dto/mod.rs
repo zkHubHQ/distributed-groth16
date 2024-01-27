@@ -49,7 +49,7 @@ pub struct VerifyProofResponse {
     #[serde(rename = "isValid")]
     pub is_valid: bool,
     #[serde(rename = "timeTaken")]
-    pub time_taken: Option<i64>,
+    pub time_taken: i64,
     #[serde(rename = "remarks")]
     pub remarks: Option<String>,
 }
@@ -62,7 +62,7 @@ impl Default for VerifyProofResponse {
             verifier_key: None,
             proof: None,
             is_valid: false,
-            time_taken: None,
+            time_taken: i64::MAX,
             remarks: None,
         }
     }
@@ -131,6 +131,20 @@ impl Default for SaveCircuitResponse {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct CreateProofWithoutMpcResponse {
+    #[serde(rename = "circuitId")]
+    pub circuit_id: String,
+    #[serde(
+        rename = "proof",
+        serialize_with = "ark_se",
+        deserialize_with = "ark_de"
+    )]
+    pub proof: Proof<Bn254>,
+    #[serde(rename = "timeTaken")]
+    pub time_taken: i64,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct CreateProofWithNaiveMpcResponse {
     #[serde(rename = "circuitId")]
     pub circuit_id: String,
     #[serde(

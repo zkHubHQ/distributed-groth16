@@ -7,5 +7,9 @@ members = [
     "mpc-api",
     "groth16",
     "zk-cli",
-    "common"
+    "common",
+    "ark-circom"
 ]
+
+[patch.crates-io]
+ark-relations = { git = "https://github.com/zkHubHQ/snark.git", default-features = false, branch = "distributed-groth16" }

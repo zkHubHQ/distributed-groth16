@@ -4,6 +4,8 @@ use ark_crypto_primitives::snark::SNARK;
 use ark_ec::pairing::Pairing;
 use ark_ec::CurveGroup;
 use ark_ff::BigInt;
+use ark_ff::BigInteger;
+use ark_ff::PrimeField;
 use ark_groth16::{Groth16, Proof};
 use ark_poly::Radix2EvaluationDomain;
 use ark_relations::r1cs::{ConstraintSynthesizer, ConstraintSystem};
@@ -217,7 +219,8 @@ async fn main() {
         num_inputs,
         num_constraints,
         &full_assignment,
-    ).unwrap();
+    )
+    .unwrap();
     end_timer!(arkworks_proof_time);
     debug!("End creating proof without MPC");
 

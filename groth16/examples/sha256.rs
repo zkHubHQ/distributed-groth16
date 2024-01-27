@@ -134,9 +134,7 @@ async fn main() {
     builder.push_input("a", 1);
     builder.push_input("b", 2);
     let circuit = builder.setup();
-    let (pk, vk) =
-        Groth16::<Bn254, CircomReduction>::circuit_specific_setup(circuit, rng)
-            .unwrap();
+    let (pk, vk) = Groth16::<Bn254, CircomReduction>::circuit_specific_setup(circuit, rng).unwrap();
 
     let circom = builder.build().unwrap();
     let full_assignment = circom.witness.clone().unwrap();
@@ -166,7 +164,8 @@ async fn main() {
         num_inputs,
         num_constraints,
         &full_assignment,
-    ).unwrap();
+    )
+    .unwrap();
     end_timer!(arkworks_proof_time);
     debug!("End creating proof without MPC");
 

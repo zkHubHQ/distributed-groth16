@@ -40,6 +40,12 @@ enum Commands {
         input_filepath: String, // In practice, this might be a more complex structure
         proof_output_filepath: String, // In practice, this would be a path to a file
     },
+    /// Generates a proof without MPC
+    MpcProve {
+        circuit_id: String,
+        input_filepath: String, // In practice, this might be a more complex structure
+        proof_output_filepath: String, // In practice, this would be a path to a file
+    },
     /// Verifies a proof
     Verify {
         circuit_id: String,
@@ -133,15 +139,53 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
             println!("Response: {:?}", res);
         }
+        Commands::MpcProve {
+            circuit_id,
+            input_filepath,
+            proof_output_filepath,
+        } => {
+            let input_bytes = read_file_as_vec(&input_filepath)?;
+            let r1cs_part =
+                multipart::Part::bytes(input_bytes).file_name("input_file");
+
+            // Create a multipart form
+            let form = multipart::Form::new()
+                .text("circuit_id", circuit_id)
+                .part("input_file", r1cs_part);
+
+            let client = reqwest::Client::new();
+            info!("Sending request to create proof without MPC");
+            let res = client
+                .post("http://localhost:8000/create_proof_without_mpc")
+                .multipart(form)
+                .send()
+                .await?
+                .json::<CreateProofWithoutMpcResponse>()
+                .await?;
+
+            info!("Proof created without MPC");
+            info!("Response: {:?}", res);
+
+            // Write the proof to a file
+            // Serialize and save proving key
+            let mut file = std::io::BufWriter::new(
+                std::fs::File::create(&proof_output_filepath).unwrap(),
+            );
+            res.proof
+                .serialize_with_mode(&mut file, Compress::Yes)
+                .unwrap();
+            file.flush().unwrap();
+
+            info!("Proof written to file: {}", proof_output_filepath);
+
+            println!("Response: {:?}", res);
+        }
         Commands::Verify {
             circuit_id,
             proof_filepath,
             public_inputs_filepath,
         } => {
             let client = reqwest::Client::new();
-            // print current working directory
-            let cwd = std::env::current_dir().unwrap();
-            println!("Current working directory: {}", cwd.display());
             let proof = parse_proof::<Bn254>(&proof_filepath).await?;
             let public_inputs = parse_public_inputs(&public_inputs_filepath)?;
             let res = client
